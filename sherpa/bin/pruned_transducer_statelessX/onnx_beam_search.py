@@ -54,7 +54,6 @@ class GreedySearchOfflineOnnx:
         Returns:
           Return a list-of-list containing the decoding token IDs.
         """
-        print("in search !!!")
         features_length = torch.tensor(
             [f.size(0) for f in features],
             dtype=torch.int64,
@@ -90,7 +89,6 @@ class GreedySearchOfflineOnnx:
             joiner_decoder_proj=joiner_decoder_proj,
             device=device,
         )
-        print(hyp_tokens)
         return hyp_tokens
 
     def greedy_search(
