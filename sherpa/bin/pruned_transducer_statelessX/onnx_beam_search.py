@@ -71,9 +71,9 @@ class GreedySearchOfflineOnnx:
             None,
             {
                 encoder.get_inputs()[0]
-                .name: features.numpy()
+                .name: features.cpu().numpy()
                 .astype(np.float32),
-                encoder.get_inputs()[1].name: features_length.numpy(),
+                encoder.get_inputs()[1].name: features_length.cpu().numpy(),
             },
         )
         encoder_out_length, encoder_out = torch.from_numpy(
@@ -82,7 +82,7 @@ class GreedySearchOfflineOnnx:
 
         hyp_tokens = self.greedy_search(
             encoder_out=encoder_out,
-            encoder_out_length=encoder_out_length.cpu(),
+            encoder_out_length=encoder_out_length,
             decoder=decoder,
             joiner=joiner,
             joiner_encoder_proj=joiner_encoder_proj,
